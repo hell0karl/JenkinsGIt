@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+    
+    environment {
+        DIRECTORY_PATH = "/Users/karll/OneDrive/Documents/Deakin/T1 2023/SIT753"
+        TESTING_ENVIRONMENT = "test-environment"
+        PRODUCTION_ENVIRONMENT = "karl-prod"
+    }
+    
+    stages{
+        stage("Build"){
+            steps{
+                echo "fetch the source code from the directory $DIRECTORY_PATH"
+                echo "compile the code ang generate any necessary artifacts"
+            }
+        }
+        
+        stage("Test"){
+            steps{
+                echo "unit tests"
+                echo "integration test"
+            }
+        }
+        
+        stage("Code Quality Check"){
+            steps{
+                echo "check the quality of the code"
+            }
+        }
+        
+        stage ("Deploy") {
+            steps{
+                echo "deploy the application to $TESTING_ENVIRONMENT"
+            }
+        }
+        
+        stage ("Approval") {
+            steps {
+                echo "manual approval needed"
+                sleep 10
+            }
+        }
+        
+        stage ("Deploy to Production") {
+            steps {
+                echo "deploy code to $PRODUCTION_ENVIRONMENT"
+            }
+        }
+    }
+}
