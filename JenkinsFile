@@ -1,84 +1,92 @@
 pipeline {
     agent any
-    
+
     environment {
-        DIRECTORY_PATH = "/Users/karll/OneDrive/Documents/Deakin/T1 2023/SIT753"
-        TESTING_ENVIRONMENT = "test-environment"
-        PRODUCTION_ENVIRONMENT = "karl-prod"
+        DIRECTORY_PATH = '/Users/karll/OneDrive/Documents/Deakin/T1 2023/SIT753'
+        TESTING_ENVIRONMENT = 'test-environment'
+        PRODUCTION_ENVIRONMENT = 'karl-prod'
     }
-    
-    stages{
-        stage("Build"){
-            steps{
-                echo "Build the code using a build automation tool to compile and package the code."
-                echo "Used Maven to compile and package a code."
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Build the code using a build automation tool to compile and package the code.'
+                echo 'Used Maven to compile and package a code.'
             }
         }
-        
-        stage("Unit and Integration Test"){
-            steps{
-                echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected."
-                echo "Used Selenium to run unit and integration tests."
-            }
-            
-            post {
-                success {
-                    mail to: "karl.labsan@gmail.com",
-                    subject: "Success Testing",
-                    body: "Unit and integration has been successful!"
-                }
-                failure
-                {
-                    mail to: "karl.labsan@gmail.com",
-                    subject: "Failed testing",
-                    body: "Unit testing and integration testing has failed!"
-                }
-            }
-        }
-        
-        stage("Code Analysis"){
-            steps{
-                echo "Integrate a code analysis tool to analyse the code and ensure it meets industry standards"
-                echo "Used checkstyle plugins in Jenkins for analysing code."
-            }
-        }
-        
-        stage ("Security Scan"){
-            steps{
-                echo "Perform a security scan on the code using a tool to identify any vulnerabilities"
-                echo " Used OWASP Dependency Check plugin on Jenkins to scan code for vulnerabilities"
+
+        stage('Unit and Integration Test') {
+            steps {
+                echo 'Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected.'
+                echo 'Used Selenium to run unit and integration tests.'
             }
 
             post {
                 success {
-                    mail to: "karl.labsan@gmail.com",
-                    subject: "Success security can",
-                    body: "Security scan has been successful!"
+                    mail to: 'karl.labsan@gmail.com',
+                    subject: 'Success Testing',
+                    body: 'Unit and integration has been successful!'
                 }
                 failure
                 {
-                    mail to: "karl.labsan@gmail.com",
-                    subject: "Failed security scan",
-                    body: "Security scan has failed!"
+                    mail to: 'karl.labsan@gmail.com',
+                    subject: 'Failed testing',
+                    body: 'Unit testing and integration testing has failed!'
                 }
             }
         }
 
-        stage ("Deploy to Staging") {
-            steps{
-                echo "Deploy the application to a staging server"
+        stage('Code Analysis') {
+            steps {
+                echo 'Integrate a code analysis tool to analyse the code and ensure it meets industry standards'
+                echo 'Used checkstyle plugins in Jenkins for analysing code.'
             }
         }
-        
-        stage ("Integration Tests on Staging") {
+
+        stage('Security Scan') {
             steps {
-                echo "Run integration tests on the stagin environment to ensure the application functions as expected in a production-like environment."
+                echo 'Perform a security scan on the code using a tool to identify any vulnerabilities'
+                echo ' Used OWASP Dependency Check plugin on Jenkins to scan code for vulnerabilities'
+            }
+
+            post {
+                success {
+                    mail to: 'karl.labsan@gmail.com',
+                    subject: 'Success security can',
+                    body: 'Security scan has been successful!'
+                }
+                failure
+                {
+                    mail to: 'karl.labsan@gmail.com',
+                    subject: 'Failed security scan',
+                    body: 'Security scan has failed!'
+                }
             }
         }
-        
-        stage ("Deploy to Production") {
+
+        stage('Deploy to Staging') {
             steps {
-                echo "Deploy application to a EC2 instance using AWS CLI"
+                echo 'Deploy the application to a staging server'
+            }
+        }
+
+        stage('Integration Tests on Staging') {
+            steps {
+                echo 'Run integration tests on the stagin environment to ensure the application functions as expected in a production-like environment.'
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo 'Deploy application to a EC2 instance using AWS CLI'
+            }
+        }
+
+        post {
+            success {
+                email to: 'karl.labsan@gmail.com',
+                subject: 'Done'
+                body: 'This is to notify that the pipeline has '
             }
         }
     }
