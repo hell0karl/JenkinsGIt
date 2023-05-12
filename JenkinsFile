@@ -50,11 +50,6 @@ pipeline {
             }
 
             post {
-                success {
-                    mail to: 'karl.labsan@gmail.com',
-                    subject: 'Security Scan Stage Completed',
-                    body: 'Security scan has been successful!'
-                }
 
                 failure
                 {
