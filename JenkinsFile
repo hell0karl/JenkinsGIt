@@ -10,48 +10,75 @@ pipeline {
     stages{
         stage("Build"){
             steps{
-                echo "fetch the source code from the directory $DIRECTORY_PATH"
-                echo "Used Maven to compile and package a code"
+                echo "Build the code using a build automation tool to compile and package the code."
+                echo "Used Maven to compile and package a code."
             }
         }
         
-        stage("Test"){
+        stage("Unit and Integration Test"){
             steps{
-                echo "unit tests"
-                echo "integration test"
+                echo "Run unit tests to ensure the code functions as expected and run integration tests to ensure the different components of the application work together as expected."
+                echo "Used Selenium to run unit and integration tests."
+            }
+            
+            post {
+                success {
+                    mail to: "karl.labsan@gmail.com",
+                    subject: "Success Testing",
+                    body: "Unit and integration has been successful!"
+                }
+                failure
+                {
+                    mail to: "karl.labsan@gmail.com",
+                    subject: "Failed testing",
+                    body: "Unit testing and integration testing has failed!"
+                }
             }
         }
         
-        stage("Code Quality Check"){
+        stage("Code Analysis"){
             steps{
-                echo "check the quality of the code"
+                echo "Integrate a code analysis tool to analyse the code and ensure it meets industry standards"
+                echo "Used checkstyle plugins in Jenkins for analysing code."
             }
         }
         
-        stage ("Deploy") {
+        stage ("Security Scan"){
             steps{
-                echo "deploy the application to $TESTING_ENVIRONMENT"
-            }
-        }
-        
-        stage ("Approval") {
-            steps {
-                echo "manual approval needed"
-                sleep 10
-            }
-        }
-        
-        stage ("Deploy to Production") {
-            steps {
-                echo "deploy code to $PRODUCTION_ENVIRONMENT"
+                echo "Perform a security scan on the code using a tool to identify any vulnerabilities"
+                echo " Used OWASP Dependency Check plugin on Jenkins to scan code for vulnerabilities"
             }
 
             post {
                 success {
                     mail to: "karl.labsan@gmail.com",
-                    subject: "Test Jenkins Email",
-                    body: "Success!"
+                    subject: "Success security can",
+                    body: "Security scan has been successful!"
                 }
+                failure
+                {
+                    mail to: "karl.labsan@gmail.com",
+                    subject: "Failed security scan",
+                    body: "Security scan has failed!"
+                }
+            }
+        }
+
+        stage ("Deploy to Staging") {
+            steps{
+                echo "Deploy the application to a staging server"
+            }
+        }
+        
+        stage ("Integration Tests on Staging") {
+            steps {
+                echo "Run integration tests on the stagin environment to ensure the application functions as expected in a production-like environment."
+            }
+        }
+        
+        stage ("Deploy to Production") {
+            steps {
+                echo "Deploy application to a EC2 instance using AWS CLI"
             }
         }
     }
