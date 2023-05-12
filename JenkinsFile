@@ -11,7 +11,7 @@ pipeline {
         stage("Build"){
             steps{
                 echo "fetch the source code from the directory $DIRECTORY_PATH"
-                echo "compile the code ang generate any necessary artifacts"
+                echo "Used Maven to compile and package a code"
             }
         }
         
