@@ -45,6 +45,14 @@ pipeline {
             steps {
                 echo "deploy code to $PRODUCTION_ENVIRONMENT"
             }
+
+            post {
+                success {
+                    mail to: "karl.labsan@gmail.com",
+                    subject: "Test Jenkins Email",
+                    body: "Success!"
+                }
+            }
         }
     }
 }
