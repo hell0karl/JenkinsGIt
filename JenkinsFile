@@ -24,13 +24,13 @@ pipeline {
             post {
                 success {
                     mail to: 'karl.labsan@gmail.com',
-                    subject: 'Success Testing',
+                    subject: 'Unit and Integration Testing Completed',
                     body: 'Unit and integration has been successful!'
                 }
                 failure
                 {
                     mail to: 'karl.labsan@gmail.com',
-                    subject: 'Failed testing',
+                    subject: 'Unit and Integration Testing Completed',
                     body: 'Unit testing and integration testing has failed!'
                 }
             }
@@ -51,21 +51,15 @@ pipeline {
 
             post {
                 success {
-                    archiveArtifacts artifacts: '**/changelog.txt', onlyIfSuccessful: true
-                }
-                
-                always{
                     mail to: 'karl.labsan@gmail.com',
-                    subject: 'Success security can',
+                    subject: 'Security Scan Stage Completed',
                     body: 'Security scan has been successful!'
-                    attachmentsPattern: 
                 }
 
-                
                 failure
                 {
                     mail to: 'karl.labsan@gmail.com',
-                    subject: 'Failed security scan',
+                    subject: 'Security Scan Stage Completed',
                     body: 'Security scan has failed!'
                 }
             }
