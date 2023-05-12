@@ -51,10 +51,17 @@ pipeline {
 
             post {
                 success {
+                    archiveArtifacts artifacts: '**/changelog.txt', onlyIfSuccessful: true
+                }
+                
+                always{
                     mail to: 'karl.labsan@gmail.com',
                     subject: 'Success security can',
                     body: 'Security scan has been successful!'
+                    attachmentsPattern: 
                 }
+
+                
                 failure
                 {
                     mail to: 'karl.labsan@gmail.com',
