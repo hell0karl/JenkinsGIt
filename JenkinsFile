@@ -81,13 +81,5 @@ pipeline {
                 echo 'Deploy application to a EC2 instance using AWS CLI'
             }
         }
-
-        post {
-            success {
-                email to: 'karl.labsan@gmail.com',
-                subject: 'Done'
-                body: 'This is to notify that the pipeline has '
-            }
-        }
     }
 }
