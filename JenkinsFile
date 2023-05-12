@@ -48,6 +48,11 @@ pipeline {
                 echo 'Perform a security scan on the code using a tool to identify any vulnerabilities'
                 echo ' Used OWASP Dependency Check plugin on Jenkins to scan code for vulnerabilities'
             }
+            success {
+                    mail to: 'karl.labsan@gmail.com',
+                    subject: 'Security Scan Stage Completed',
+                    body: 'Security scan has been successful!'
+                }
 
             post {
 
