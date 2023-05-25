@@ -69,6 +69,16 @@ pipeline {
             steps {
                 echo 'Deploy application to a EC2 instance using AWS CLI'
             }
+
+            post
+            {
+                success
+                {
+                    mail to: "karl.labsan@gmail.com",
+                    subject: " Test Jenkins Email",
+                    body: "Success!"
+                }
+            }
         }
     }
 }
