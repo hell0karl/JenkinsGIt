@@ -23,9 +23,12 @@ pipeline {
 
             post {
                 success {
+                    archiveArtifacts '**/build.log'
+
                     mail to: 'karl.labsan@gmail.com',
                     subject: 'Unit and Integration Testing Completed',
-                    body: 'Unit and integration has been successful!'
+                    body: 'Unit and integration has been successful!',
+                    attachmentPattern: '**/build.log'
                 }
                 failure
                 {
