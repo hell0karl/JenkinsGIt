@@ -32,7 +32,7 @@ pipeline {
                 {
                     mail to: 'karl.labsan@gmail.com',
                     subject: 'Unit and Integration Testing Completed',
-                    body: 'Unit testing and integration testing has failed!'
+                    body: 'Unit testing and integration testing has failed!',
                     attachmentsPattern: '$WORKSPACE/build.log',
                 }
             }
@@ -55,7 +55,7 @@ pipeline {
                 success {
                     mail to: 'karl.labsan@gmail.com',
                     subject: 'Security Scan Stage Completed',
-                    body: 'Security scan has been successful!'
+                    body: 'Security scan has been successful!',
                     attachmentsPattern: '$WORKSPACE/build.log',
                 }
                 
