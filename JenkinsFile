@@ -26,14 +26,14 @@ pipeline {
                     mail to: 'karl.labsan@gmail.com',
                     subject: 'Unit and Integration Testing Completed',
                     body: 'Unit and integration has been successful!',
-                    attachments: '**/build.log'
+                    attachLog: true
                 }
                 failure
                 {
                     mail to: 'karl.labsan@gmail.com',
                     subject: 'Unit and Integration Testing Completed',
                     body: 'Unit testing and integration testing has failed!',
-                    attachments: '**/build.log'
+                    attachLog: true
                 }
             }
         }
