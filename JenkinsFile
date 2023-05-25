@@ -25,10 +25,15 @@ pipeline {
                 success {
                     archiveArtifacts '**/build.log'
 
-                    mail to: 'karl.labsan@gmail.com',
-                    subject: 'Unit and Integration Testing Completed',
-                    body: 'Unit and integration has been successful!',
-                    attachmentsPattern: '**/build.log'
+                    emailext subject: "Build Notification",
+                    body: "Check the attached log file for more information.",
+                    to: "karl.labsan@gmail.com",
+                    recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                    attachmentsPattern: 'build.log'
+                    // mail to: 'karl.labsan@gmail.com',
+                    // subject: 'Unit and Integration Testing Completed',
+                    // body: 'Unit and integration has been successful!',
+                    // attachmentsPattern: '**/build.log'
                 }
                 failure
                 {
