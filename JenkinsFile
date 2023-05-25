@@ -23,10 +23,10 @@ pipeline {
 
             post {
                 success {
+                    archiveArtifacts artifacts: 'build.log', fingerprint: true
                     emailext (
-                        subject: "Security Scan Stage Notification: Success",
-                        body: "Security scan has passed. Please find the attached logs.",
-                        attachmentsPattern: "**/build.log",
+                        subject: "Test Stage Notification: Failure",
+                        body: "Unit and integration tests have failed. The build log is archived: ${BUILD_URL}artifact/build.log",
                         to: "your-email@example.com"
                     )
 
