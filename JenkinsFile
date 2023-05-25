@@ -30,7 +30,7 @@ pipeline {
                 failure
                 {
                     mail to: 'karl.labsan@gmail.com',
-                    subject: 'Unit and Integration Testing Completed',
+                    subject: 'Unit and Integration Testing Completed!',
                     body: 'Unit testing and integration testing has failed!'
                 }
             }
