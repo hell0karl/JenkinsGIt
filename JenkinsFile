@@ -23,13 +23,12 @@ pipeline {
 
             post {
                 success {
-                    emailext {
-                        subject: "Test",
-                        body: "test",
-                        attachmentsPattern "**/build.log",
-                        to: "karl.labsan@gmail.com"
-                    }
-                    archiveArtifacts '**/build.log'
+                    emailext (
+                        subject: "Security Scan Stage Notification: Success",
+                        body: "Security scan has passed. Please find the attached logs.",
+                        attachmentsPattern: "**/build.log",
+                        to: "your-email@example.com"
+                    )
 
                     // mail to: 'karl.labsan@gmail.com',
                     // subject: 'Unit and Integration Testing Completed',
